@@ -10,3 +10,6 @@ print(pb_3)
 print(pb_3 % 7)
 
 print(PearBasket(15) // 1)
+
+print(pb_3)
+print(pb_3 - 5)

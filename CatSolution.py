@@ -3,7 +3,7 @@ class AbstractCat:
         self.weight = 0
         self.leftovers = 0
 
-    def eat(self, food):
+    def eat(self, food: int):
         self.weight += (self.leftovers + food) // 10
         self.leftovers = (self.leftovers + food) % 10
 
@@ -12,7 +12,7 @@ class AbstractCat:
 
 
 class Kitten(AbstractCat):
-    def __init__(self, weight):
+    def __init__(self, weight: int):
         super().__init__()
         self.weight = weight
 
@@ -24,7 +24,7 @@ class Kitten(AbstractCat):
 
 
 class Cat(Kitten):
-    def __init__(self, weight, nick):
+    def __init__(self, weight: int, nick: str):
         super().__init__(weight)
         self.nick = nick
 

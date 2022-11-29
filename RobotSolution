@@ -1,0 +1,48 @@
+class ExceptionWrongCoordinates(Exception):
+    """Класс исключения"""
+    pass
+
+
+def check_corr_coord(coord: tuple):     # CCC
+    if 0 <= coord[0] <= 100 and 0 <= coord[1] <= 100:
+        return True
+    return False
+
+
+class Robot:
+    def __init__(self, coord: tuple):
+        if check_corr_coord(coord):
+            self.coord = coord
+            self.way = [coord]
+        else:
+            raise ExceptionWrongCoordinates("Некорректные координаты")
+
+    def move(self, commands: str):
+
+        def route(coord: tuple, vec: str):
+            vector = {'N': (0, 1), 'S': (0, -1), 'E': (1, 0), 'W': (-1, 0)}
+            return coord[0] + vector.get(vec)[0], coord[1] + vector.get(vec)[1]
+
+        self.way = [self.coord]
+        for com in commands:
+            new_coord = route(self.coord, com)
+            if check_corr_coord(new_coord):
+                self.way.append(new_coord)
+                self.coord = new_coord
+            else:
+                # Не знаю, что делать. Ошибка, просто в стенку или просто завершить?
+                pass
+
+        return self.coord
+
+    def path(self):
+        return self.way
+
+
+if __name__ == "__main__":
+    rb = Robot((3, 13))
+    print(rb.way)
+
+    r = Robot((0, 0))
+    print(r.move("NENW"))
+    print(*r.path())
